@@ -1,0 +1,14 @@
+{
+  "name": "datocms-tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "datocms-client": "^3.4.2",
+    "esm": "^3.2.25"
+  },
+  "scripts": {
+    "dump": "node bin/dump-json.mjs"
+  }
+}
