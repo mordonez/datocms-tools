@@ -9,6 +9,7 @@
     "esm": "^3.2.25"
   },
   "scripts": {
-    "dump": "node bin/dump-json.mjs"
+    "dump": "node bin/dump-json.mjs",
+    "get-images": "node bin/get-uploads.mjs"
   }
 }
