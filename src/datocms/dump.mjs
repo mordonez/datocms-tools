@@ -12,7 +12,7 @@ const siteInfo = async client => {
 }
 
 const allUploads = async client => {
-  return await client.uploads.all({})
+  return await client.uploads.all({} , { allPages: true })
 }
 
 const dump = async () => {
