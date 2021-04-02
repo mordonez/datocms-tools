@@ -15,8 +15,8 @@ const allUploads = async client => {
   return await client.uploads.all({} , { allPages: true })
 }
 
-const dump = async () => {
-  const client = new SiteClient(process.env.DATOCMS_API_KEY)
+const dump = async datocms_api_key => {
+  const client = new SiteClient(datocms_api_key)
   const items = await allItems(client)
   fs.writeFileSync('items.json', JSON.stringify(items))
   const site = await siteInfo(client)
