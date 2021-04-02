@@ -19,9 +19,9 @@ const dump = async () => {
   const client = new SiteClient(process.env.DATOCMS_API_KEY)
   const items = await allItems(client)
   fs.writeFileSync('items.json', JSON.stringify(items))
-  const site = siteInfo(client)
+  const site = await siteInfo(client)
   fs.writeFileSync('site.json', JSON.stringify(site))
-  const uploads = allUploads(client)
+  const uploads = await allUploads(client)
   fs.writeFileSync('uploads.json', JSON.stringify(uploads))
 }
 
