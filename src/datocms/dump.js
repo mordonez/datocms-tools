@@ -6,6 +6,10 @@ import { Transform } from 'stream'
 import DatoCMSClient from 'datocms-client'
 const { SiteClient } = DatoCMSClient
 
+const allItemTypes = async client => {
+  return await client.itemTypes.all({})
+}
+
 const allItems = async client => {
   return await client.items.all({}, { allPages: true })
 }
@@ -20,6 +24,8 @@ const allUploads = async client => {
 
 const dump = async datocms_api_key => {
   const client = new SiteClient(datocms_api_key)
+  const itemTypes = await allItemTypes(client)
+  fs.writeFileSync('itemTypes.json', JSON.stringify(itemTypes))
   const items = await allItems(client)
   fs.writeFileSync('items.json', JSON.stringify(items))
   const site = await siteInfo(client)
