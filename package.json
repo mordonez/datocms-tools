@@ -8,8 +8,8 @@
     "datocms-client": "^3.4.2",
     "esm": "^3.2.25"
   },
-  "scripts": {
-    "dump": "node bin/dump-json.mjs",
-    "get-images": "node bin/get-uploads.mjs"
+  "bin": {
+    "datocms-dump": "./bin/dump-json.js",
+    "datocms-get-uploads": "./bin/get-uploads.js"
   }
 }
