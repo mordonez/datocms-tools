@@ -34,13 +34,13 @@ Creates the following:
 Downloads all the project uploads to a local directory.
 
 ```js
-$ DATOCMS_API_KEY={{your DatoCMS read-only API key}} datocms-get-uploads
+$ DATOCMS_API_KEY={{your DatoCMS read-only API key}} datocms-get-uploads {{output path}}
 ```
 
 If you want logging, pass the VERBOSE environment:
 
 ```js
-$ DATOCMS_API_KEY={{your DatoCMS read-only API key}} VERBOSE=1 datocms-get-uploads
+$ DATOCMS_API_KEY={{your DatoCMS read-only API key}} VERBOSE=1 datocms-get-uploads {{output path}}
 ```
 
 The download is progressive, so if files are already present,
