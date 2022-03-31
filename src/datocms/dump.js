@@ -8,12 +8,27 @@ import DatoCMSClient from 'datocms-client'
 const { SiteClient } = DatoCMSClient
 
 const allItemTypes = async client => {
+  return await client.itemTypes.all({});
+}
+
+const allFields = async client => {
   const itemTypes = await client.itemTypes.all({});
   const fields = await Promise.all(itemTypes.map(async (itemType) => client.fields.all(itemType.id)));
-  return {
-    itemTypes,
-    fields: _.chain(fields).flatten().sortBy('position').value(),
-  };
+  return _.chain(fields).flatten().sortBy('position').value()
+}
+
+const allFieldsets = async client => {
+  const itemTypes = await client.itemTypes.all({});
+  const fieldsets = await Promise.all(itemTypes.map(async (itemType) => client.fieldsets.all(itemType.id)));
+  return _.chain(fieldsets).flatten().sortBy('position').value()
+}
+
+const allItems = async client => {
+  return await client.items.all({}, { allPages: true })
+}
+
+const allMenuItems = async client => {
+  return await client.menuItems.all({})
 }
 
 const siteInfo = async client => {
@@ -28,8 +43,14 @@ const dump = async datocms_api_key => {
   const client = new SiteClient(datocms_api_key)
   const itemTypes = await allItemTypes(client)
   fs.writeFileSync('itemTypes.json', JSON.stringify(itemTypes))
+  const fields = await allFields(client)
+  fs.writeFileSync('fields.json', JSON.stringify(fields))
+  const fieldsets = await allFieldsets(client)
+  fs.writeFileSync('fieldsets.json', JSON.stringify(fieldsets))
   const items = await allItems(client)
   fs.writeFileSync('items.json', JSON.stringify(items))
+  //const menu = await allMenuItems(client)
+  //fs.writeFileSync('menuItems.json', JSON.stringify(menu))
   const site = await siteInfo(client)
   fs.writeFileSync('site.json', JSON.stringify(site))
   const uploads = await allUploads(client)
