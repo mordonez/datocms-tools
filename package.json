@@ -11,5 +11,8 @@
   "bin": {
     "datocms-dump": "./bin/dump-json.js",
     "datocms-get-uploads": "./bin/get-uploads.js"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21"
   }
 }

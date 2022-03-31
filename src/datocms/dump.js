@@ -2,16 +2,18 @@ import fs from 'fs'
 import https from 'https'
 import path from 'path'
 import { Transform } from 'stream'
+import _  from 'lodash'
 
 import DatoCMSClient from 'datocms-client'
 const { SiteClient } = DatoCMSClient
 
 const allItemTypes = async client => {
-  return await client.itemTypes.all({})
-}
-
-const allItems = async client => {
-  return await client.items.all({}, { allPages: true })
+  const itemTypes = await client.itemTypes.all({});
+  const fields = await Promise.all(itemTypes.map(async (itemType) => client.fields.all(itemType.id)));
+  return {
+    itemTypes,
+    fields: _.chain(fields).flatten().sortBy('position').value(),
+  };
 }
 
 const siteInfo = async client => {
